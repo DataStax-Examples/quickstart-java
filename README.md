@@ -4,6 +4,8 @@
 
 A basic CRUD Java application using the DataStax Java Driver for Apache Cassandra. The intent is to help users get up and running quickly with the driver. If you are having trouble, the complete code solution for `GettingStarted.java` can be found [here](https://gist.github.com/beccam/d8491990895fe659e0584a4bc31d1df3).
 
+Contributors: [Rebecca Mills](https://github.com/beccam)
+
 ## Prerequisites
   * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 2.1+
   * [Maven](https://maven.apache.org/download.cgi) build automation tool
