@@ -16,6 +16,11 @@ Contributors: [Rebecca Mills](https://github.com/beccam)
   * [Maven](https://maven.apache.org/download.cgi) build automation tool
   * Java 8
   
+## Project Layout
+
+* [GettingStarted.java](/src/main/java/com/datastax/quickstart/GettingStarted.java) - Main application file with space to fill in CRUD operation code
+* [users.cql](/src/main/resources/users.cql) - Use this file to create the schema  
+  
 ## Create the keyspace and table
 The `resources/users.cql` file provides the schema used for this project:
 
