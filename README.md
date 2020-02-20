@@ -16,7 +16,9 @@ Contributors: [Rebecca Mills](https://github.com/beccam)
   * [Maven](https://maven.apache.org/download.cgi) build automation tool
   * Java 8
   
-## Create the keyspace and table
+## Setup  
+  
+### Create the keyspace and table
 The `resources/users.cql` file provides the schema used for this project:
 
 ```sql
@@ -31,7 +33,7 @@ CREATE TABLE demo.users (
     firstname text);
 ```
 
-## Connect to your cluster
+### Connect to your cluster
 
 All of our code is contained in the `GettingStarted` class. 
 Note how the main method creates a session to connect to our cluster and runs the CRUD operations against it. 
@@ -46,10 +48,10 @@ try (CqlSession session = CqlSession.builder()
                 .build()) 
 ```
 
-## CRUD Operations
+### CRUD Operations
 Fill the code in the methods that will add a user, get a user, update a user and delete a user from the table with the driver.
 
-### INSERT a user
+#### INSERT a user
 ```java
 private static void setUser(CqlSession session, String lastname, int age, String city, String email, String firstname) {
     
@@ -62,7 +64,7 @@ private static void setUser(CqlSession session, String lastname, int age, String
 
 ```
 
-### SELECT a user
+#### SELECT a user
 ```java
 private static void getUser(CqlSession session, String lastname) {
 
@@ -78,7 +80,7 @@ private static void getUser(CqlSession session, String lastname) {
 }
 ```
 
-### UPDATE a user's age
+#### UPDATE a user's age
 ```java
 private static void updateUser(CqlSession session, int age, String lastname) {
 
@@ -90,7 +92,7 @@ private static void updateUser(CqlSession session, int age, String lastname) {
 }
 ```   
 
-### DELETE a user
+#### DELETE a user
 ```java
 private static void deleteUser(CqlSession session, String lastname) {
 
