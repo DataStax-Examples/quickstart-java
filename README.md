@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/beccam/quickstart-java.svg?branch=master)](https://travis-ci.org/beccam/quickstart-java)
 
-A basic CRUD Java application using the DataStax Java Driver for Apache Cassandra. If you are having trouble, the complete code solution for `GettingStarted.java` can be found [here](https://gist.github.com/beccam/d8491990895fe659e0584a4bc31d1df3).
+A basic CRUD Java application using the DataStax Java Driver for Apache Cassandra. Run the [GettingStartedComplete.java](/src/main/java/com/datastax/quickstart/GettingStartedComplete.java) if you want to run the application with the complete code.
 
 Contributors: [Rebecca Mills](https://github.com/beccam)
 
