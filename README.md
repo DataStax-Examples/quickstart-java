@@ -1,4 +1,4 @@
-# DataStax Java Driver for Apache Cassandra Quickstart
+# DataStax Java Driver for Apache Cassandra™ Quickstart
 
 [![Build Status](https://travis-ci.org/beccam/quickstart-java.svg?branch=master)](https://travis-ci.org/beccam/quickstart-java)
 
