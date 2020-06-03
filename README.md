@@ -1,115 +1,93 @@
-# DataStax Java Driver for Apache Cassandra™ Quickstart
+# DataStax Desktop - Java Netflix example
+An introduction to using the Cassandra database with well-defined steps to optimize your learning.  Using a Netflix dataset for sample data, your locally running Cassandra database will contain a minimal set of 
+show data for you to customize and experiment with.
 
-[![Build Status](https://travis-ci.org/beccam/quickstart-java.svg?branch=master)](https://travis-ci.org/beccam/quickstart-java)
+Contributors: 
 
-A basic CRUD Java application using the DataStax Java Driver for Apache Cassandra. Run the [GettingStartedComplete.java](/src/main/java/com/datastax/quickstart/GettingStartedComplete.java) file if you want to skip the exercise and run the application with the complete code.
+* [Jeff Banks](https://github.com/jeffbanks)
 
-Contributors: [Rebecca Mills](https://github.com/beccam)
-
+* [Chris Splinter](https://github.com/csplinter)
+ 
 ## Objectives
-
-* To demonstrate how to perform basic CRUD operations with the DataStax Java Driver.
-* The intent is to help users get up and running quickly with the driver. 
-
-## How this Sample Works
-This project walks through basic CRUD operations using Cassandra. The demo application will first insert a row of user data, select that same row back out, update the row and finally delete the user. The README includes the code snippets to be filled in to the main application code to complete the functionality.
-
-## Prerequisites
-  * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 2.1+
-  * [Maven](https://maven.apache.org/download.cgi) build automation tool
-  * Java 8
+* Leverage DataStax driver APIs for interaction with a local running Cassandra database.
+* Set up a Cassandra Query Language (CQL) session and perform operations such as creating, reading, and writing.
+* Visualize how the CQL is used with builder patterns provided by the DataStax driver APIs.
+* Use the Netflix show dataset as example information across three differently constructed tables.
+* Observe how the partition key along with clustering keys produce an optimized experience.
   
-## Project Layout
+## Project layout
+* **CassandraWithNetflix.java** - A Java class containing all the logic to interact with the running Cassandra instance.
+* **logback.xml** - A logging configuration to assist with more detailed logging as needed.
 
-* [GettingStarted.java](/src/main/java/com/datastax/quickstart/GettingStarted.java) - Main application file with space to fill in CRUD operation code
-* [users.cql](/src/main/resources/users.cql) - Use this file to create the schema  
-  
-## Create the keyspace and table
-The `resources/users.cql` file provides the schema used for this project:
+## How this works
+To get started, read through the comments in the `main()` method of the CassandraWithNetflix class to familiarize yourself with 
+the steps for interacting with your own Cassandra database. The methods invoked by the `main()` method are created to provide
+more flexibility for modifications as you learn.
 
-```sql
-CREATE KEYSPACE demo
-    WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
+## Setup and running
 
-CREATE TABLE demo.users (
-    lastname text PRIMARY KEY,
-    age int,
-    city text,
-    email text,
-    firstname text);
+### Prerequisites
+If running [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites will be required. The Cassandra instance is provided with the DataStax 
+Desktop stack as part of container provisioning.
+
+If not using DataStax Desktop, spin up your own local instance of Cassandra exposing
+the address and port configured in the **CassandraWithNetflix** class.  
+
+### Running
+Verify your Cassandra database is running in your local container. Run the Java `main()` method 
+and view the console output for steps executed.
+
+Check for the following output:
+```
+Creating Keyspace: demo
+Creating Master Table
+Creating Titles By Date Table
+Creating Titles By Rating Table
+
+Inserting into Master Table for 'Life of Jimmy' 
+Inserting into Master Table for 'Pulp Fiction' 
+Inserting into TitlesByDate Table for 'Life of Jimmy' 
+Inserting into TitlesByDate Table for 'Pulp Fiction' 
+Inserting into TitlesByRating Table for 'Life of Jimmy' 
+Inserting into TitlesByRating Table for 'Pulp Fiction' 
+
+ReadAll From: netflix_master
+[title:'Life of Jimmy', show_id:100000000, cast:['Jimmy'], country:['United States'], date_added:'2020-06-01', description:'Experiences of a guitar playing DataStax developer', director:['Franky J'], duration:'42 min', listed_in:['Action'], rating:'TV-18', release_year:2020, type:'Movie']
+[title:'Pulp Fiction', show_id:100000001, cast:['John Travolta','Samuel L. Jackson','Uma Thurman','Harvey Keitel','Tim Roth','Amanda Plummer','Maria de Medeiros','Ving Rhames','Eric Stoltz','Rosanna Arquette','Christopher Walken','Bruce Willis'], country:['United States'], date_added:'2019-01-19', description:'This stylized crime caper weaves together stories ...', director:['Quentin Tarantino'], duration:'154 min', listed_in:['Classic Movies','Cult Movies','Dramas'], rating:'R', release_year:1994, type:'Movie']
+
+ReadAll From: netflix_titles_by_date
+[release_year:2020, date_added:'2020-06-01', show_id:100000000, title:'Life of Jimmy']
+[release_year:2020, date_added:'2020-06-01', show_id:100000001, title:'Pulp Fiction']
+
+ReadAll From: netflix_titles_by_rating
+[rating:'TV-18', show_id:100000000, title:'Life of Jimmy']
+[rating:'R', show_id:100000001, title:'Pulp Fiction']
+
+ReadAll from Master, Filtering by Title: Pulp Fiction
+[title:'Pulp Fiction', show_id:100000001, cast:['John Travolta','Samuel L. Jackson','Uma Thurman','Harvey Keitel','Tim Roth','Amanda Plummer','Maria de Medeiros','Ving Rhames','Eric Stoltz','Rosanna Arquette','Christopher Walken','Bruce Willis'], country:['United States'], date_added:'2019-01-19', description:'This stylized crime caper weaves together stories ...', director:['Quentin Tarantino'], duration:'154 min', listed_in:['Classic Movies','Cult Movies','Dramas'], rating:'R', release_year:1994, type:'Movie']
+
+Read of Director from Master, Filter by Title: Pulp Fiction
+[director:['Quentin Tarantino']]
+
+Update of Director in Master by Show Id: 100000001 and Title: Pulp Fiction
+
+Read of Director from Master, Filter by Title: Pulp Fiction
+[director:['Quentin Jerome Tarantino']]
 ```
 
-## Connect to your cluster
+### Having trouble?
+Are you getting errors reported but can't figure out what to do next?  There is a `logback.xml` file that resides
+in the `./src/main/resource` folder.  Edit this file and adjust the logging to a lower level to get more logging detail.  Re-run after editing.
 
-All of our code is contained in the `GettingStarted` class. 
-Note how the main method creates a session to connect to our cluster and runs the CRUD operations against it. 
-Replace the default parameters in `CqlSession.builder()` with your own hostname, port and datacenter.
+For example:
+- Adjust **root level** from "INFO" to "DEBUG".
+- Adjust **logger level** for the com.datastax.oss.driver to "DEBUG" or "TRACE".
 
-```java
-// TO DO: Fill in your own host, port, and data center
-try (CqlSession session = CqlSession.builder()
-                .addContactPoint(new InetSocketAddress("127.0.0.1", 9042))
-                .withKeyspace("demo")
-                .withLocalDatacenter("datacenter1")
-                .build()) 
-```
+If you still can't determine the issue, copy your log output, document any details, and head 
+over to the [DataStax Community](https://community.datastax.com/spaces/131/datastax-desktop.html) to get some assistance.
 
-## CRUD Operations
-Fill the code in the methods that will add a user, get a user, update a user and delete a user from the table with the driver.
 
-### INSERT a user
-```java
-private static void setUser(CqlSession session, String lastname, int age, String city, String email, String firstname) {
-    
-    //TO DO: execute SimpleStatement that inserts one user into the table
-    session.execute(
-            SimpleStatement.builder( "INSERT INTO users (lastname, age, city, email, firstname) VALUES (?,?,?,?,?)")
-            .addPositionalValues(lastname, age, city, email, firstname)
-            .build());
-}
-
-```
-
-### SELECT a user
-```java
-private static void getUser(CqlSession session, String lastname) {
-
-    //TO DO: execute SimpleStatement that retrieves one user from the table
-    //TO DO: print firstname and age of user
-    ResultSet rs = session.execute(
-    SimpleStatement.builder("SELECT * FROM users WHERE lastname=?")
-            .addPositionalValue(lastname)
-            .build());
-
-    Row row = rs.one();
-    System.out.format("%s %d\n", row.getString("firstname"), row.getInt("age"));
-}
-```
-
-### UPDATE a user's age
-```java
-private static void updateUser(CqlSession session, int age, String lastname) {
-
-    //TO DO: execute SimpleStatement that updates the age of one user
-    session.execute(
-            SimpleStatement.builder("UPDATE users SET age =?  WHERE lastname =? ")
-            .addPositionalValues(age, lastname)
-            .build());
-}
-```   
-
-### DELETE a user
-```java
-private static void deleteUser(CqlSession session, String lastname) {
-
-   //TO DO: execute SimpleStatement that deletes one user from the table
-    session.execute(
-            SimpleStatement.builder("DELETE FROM users WHERE lastname=?")
-                    .addPositionalValue(lastname)
-                    .build());
-
-}
-```
-    
+### Questions or comments?
+If you have any questions or want to post a feature request, visit the [Desktop space at DataStax Community](https://community.datastax.com/spaces/131/datastax-desktop.html) 
 
 
