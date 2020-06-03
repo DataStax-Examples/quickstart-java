@@ -26,7 +26,7 @@ import java.util.List;
  * limitations under the License.
  *
  * <p>
- * DataStax Getting Started Java with Netflix
+ * DataStax Quickstart Java with Netflix
  * <p>
  * Utilizes the Netflix dataset containing data from all Netflix
  * titles and movies as of 2019.
