@@ -9,7 +9,6 @@ import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.InetSocketAddress;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -49,9 +48,6 @@ public class CassandraWithNetflix
 
     private static final String KEYSPACE_NAME = "demo";
     private static final int KEYSPACE_REPLICATION_FACTOR = 1;
-    private static final String LOCAL_DC = "datastax-desktop";
-    private static final String CONTACT_POINT_ADDRESS = "127.0.0.1";
-    private static final int CONTACT_POINT_PORT = 9042;
 
     private static final Logger log = LoggerFactory.getLogger(CassandraWithNetflix.class);
 
@@ -65,10 +61,7 @@ public class CassandraWithNetflix
     public static void main(String[] args)
     {
 
-        try (CqlSession session = CqlSession.builder()
-                .addContactPoint(new InetSocketAddress(CONTACT_POINT_ADDRESS, CONTACT_POINT_PORT))
-                .withLocalDatacenter(LOCAL_DC)
-                .build())
+        try (CqlSession session = CqlSession.builder().build())
         {
 
             // 1. Create the keyspace using our newly constructed CQL session.

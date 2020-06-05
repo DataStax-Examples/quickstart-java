@@ -30,8 +30,10 @@ more flexibility for modifications as you learn.
 If running [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites will be required. The Cassandra instance is provided with the DataStax 
 Desktop stack as part of container provisioning.
 
-If not using DataStax Desktop, spin up your own local instance of Cassandra exposing
-the address and port configured in the **CassandraWithNetflix** class.  
+If not using DataStax Desktop, spin up your own local instance of Cassandra exposing its address and 
+port to align with settings in the **application.conf**.  This file is located in the **resources** folder.  
+
+As you experiment with local customizations to the source, know that the example supports Java version 14. 
 
 ### Running
 Verify your Cassandra database is running in your local container. Run the Java `main()` method 
