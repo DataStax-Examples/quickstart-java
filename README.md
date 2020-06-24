@@ -5,8 +5,8 @@ show data for you to customize and experiment with.
 Contributors: 
 
 * [Jeff Banks](https://github.com/jeffbanks)
-
 * [Chris Splinter](https://github.com/csplinter)
+* [Jamie Gillenwater](https://github.com/jgillenwater)
  
 ## Objectives
 * Leverage DataStax driver APIs for interaction with a local running Cassandra database.
@@ -20,18 +20,18 @@ Contributors:
 * **logback.xml** - A logging configuration to assist with more detailed logging as needed.
 
 ## How this works
-To get started, read through the comments in the `main()` method of the CassandraWithNetflix class to familiarize yourself with 
+To get started, read the `main()` method of the CassandraWithNetflix class comments to learn 
 the steps for interacting with your own Cassandra database. The methods invoked by the `main()` method are created to provide
 more flexibility for modifications as you learn.
 
 ## Setup and running
 
 ### Prerequisites
-If running [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites will be required. The Cassandra instance is provided with the DataStax 
+If running [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites are required. The Cassandra instance is provided with the DataStax 
 Desktop stack as part of container provisioning.
 
 If not using DataStax Desktop, spin up your own local instance of Cassandra exposing its address and 
-port to align with settings in the **application.conf**.  This file is located in the **resources** folder.  
+port to align with settings in `resources/application.conf`.  
 
 As you experiment with local customizations to the source, know that the example supports Java version 14. 
 
