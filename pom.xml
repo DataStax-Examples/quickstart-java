@@ -7,7 +7,7 @@
     <artifactId>quickstart-java-netflix</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <oss-driver.version>4.6.0</oss-driver.version>
+        <oss-driver.version>4.7.2</oss-driver.version>
         <logback.version>1.2.3</logback.version>
         <java.version>14</java.version>
     </properties>
