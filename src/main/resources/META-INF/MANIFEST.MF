@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Jeff Banks (DataStax)
+Build-Jdk: 14.0.1
+Main-Class: com.datastax.quickstart.netflix.CassandraWithNetflix
